@@ -1,5 +1,6 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    access_denied_url: /  #redirect to home after beign AccessDenied
     providers:
         in_memory: { memory: null }
         app_user_provider:
@@ -20,6 +21,7 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+                target: app_login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
