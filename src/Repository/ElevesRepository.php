@@ -19,6 +19,15 @@ class ElevesRepository extends ServiceEntityRepository
         parent::__construct($registry, Eleves::class);
     }
 
+
+    public function findAll()
+    {
+        $builder = $this->createQueryBuilder('c');
+        $builder->orderBy('c.nom', 'ASC');
+        return $builder->getQuery()->getResult();
+    }
+
+
     // /**
     //  * @return Eleves[] Returns an array of Eleves objects
     //  */
