@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,19 @@ class EnseignementComp
     private $nom_enseignement_comp;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\diplome")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Diplome", inversedBy="enseignementComps")
      */
     private $diplome;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Eleves", mappedBy="enseignement_comp")
+     */
+    private $eleves;
+
+    public function __construct()
+    {
+        $this->eleves = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -43,14 +55,45 @@ class EnseignementComp
         return $this;
     }
 
-    public function getDiplome(): ?diplome
+    public function getDiplome(): ?Diplome
     {
         return $this->diplome;
     }
 
-    public function setDiplome(?diplome $diplome): self
+    public function setDiplome(?Diplome $diplome): self
     {
         $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Eleves[]
+     */
+    public function getEleves(): Collection
+    {
+        return $this->eleves;
+    }
+
+    public function addElefe(Eleves $elefe): self
+    {
+        if (!$this->eleves->contains($elefe)) {
+            $this->eleves[] = $elefe;
+            $elefe->setEnseignementComp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElefe(Eleves $elefe): self
+    {
+        if ($this->eleves->contains($elefe)) {
+            $this->eleves->removeElement($elefe);
+            // set the owning side to null (unless already changed)
+            if ($elefe->getEnseignementComp() === $this) {
+                $elefe->setEnseignementComp(null);
+            }
+        }
 
         return $this;
     }

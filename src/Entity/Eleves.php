@@ -57,17 +57,17 @@ class Eleves
     private $amenagement_pedagogique;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EtablissementOrigine")
+     * @ORM\ManyToOne(targetEntity="App\Entity\EtablissementOrigine", inversedBy="eleves")
      */
     private $etablissement_origine;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Classe")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Classe", inversedBy="eleves")
      */
     private $classe;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\EnseignementComp")
+     * @ORM\ManyToOne(targetEntity="App\Entity\EnseignementComp", inversedBy="eleves")
      */
     private $enseignement_comp;
 
