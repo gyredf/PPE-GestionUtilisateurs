@@ -17,11 +17,14 @@
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Sexe</th>
-                <th>Date_naissance</th>
+                <th>Date naissance</th>
                 <th>Statut</th>
                 <th>Lv2</th>
                 <th>Remarque</th>
-                <th>Amenagement_pedagogique</th>
+                <th>Amenagement pedagogique</th>
+                <th>Etablissement origine</th>
+                <th>Classe</th>
+                <th>Enseignement Comp</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -37,6 +40,9 @@
                 <td>{{ elefe.lv2 }}</td>
                 <td>{{ elefe.remarque }}</td>
                 <td>{{ elefe.amenagementPedagogique }}</td>
+                <td>{{ elefe.etablissementOrigine.NomEtablissementOrigine }}</td>
+                <td>{{ elefe.classe.NomClasse }}</td>
+                <td>{{ elefe.enseignementComp.NomEnseignementComp }}</td>
                 <td>
                     <div class="btn-group">
                         <a class="btn btn-primary" href="{{ path('eleves_show', {'id': elefe.id}) }}"><i class="fas fa-eye"></i></a>
