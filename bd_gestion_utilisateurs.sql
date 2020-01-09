@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 12 déc. 2019 à 16:11
+-- Généré le :  jeu. 09 jan. 2020 à 15:45
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.3.5
 
@@ -35,7 +35,17 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `nom_classe` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_8F87BF9626F859E2` (`diplome_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`id`, `diplome_id`, `nom_classe`) VALUES
+(1, 1, 'SIO1'),
+(2, 1, 'SIO2'),
+(3, 2, 'GPME1'),
+(4, 2, 'GPME2');
 
 -- --------------------------------------------------------
 
