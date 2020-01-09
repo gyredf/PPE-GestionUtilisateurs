@@ -1,22 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Eleves{% endblock %}
+{% block title %}Détail{% endblock %}
 
 {% block body %}
-    <h1>Eleves</h1>
+    <h1>Détail : {{ elefe.nom }} {{ elefe.prenom }}</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ elefe.id }}</td>
-            </tr>
             <tr>
                 <th>Nom</th>
                 <td>{{ elefe.nom }}</td>
             </tr>
             <tr>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <td>{{ elefe.prenom }}</td>
             </tr>
             <tr>
@@ -24,7 +20,7 @@
                 <td>{{ elefe.sexe }}</td>
             </tr>
             <tr>
-                <th>Date_naissance</th>
+                <th>Date de naissance</th>
                 <td>{{ elefe.dateNaissance ? elefe.dateNaissance|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
@@ -40,15 +36,28 @@
                 <td>{{ elefe.remarque }}</td>
             </tr>
             <tr>
-                <th>Amenagement_pedagogique</th>
+                <th>Aménagement Pédagogique</th>
                 <td>{{ elefe.amenagementPedagogique }}</td>
             </tr>
+            <tr>
+                <th>Établissement d'origine</th>
+                <td>{{ elefe.etablissementOrigine.NomEtablissementOrigine }}</td>
+            </tr>
+            <tr>
+                <th>Classe</th>
+                <td>{{ elefe.classe.NomClasse }}</td>
+            </tr>
+            <tr>
+                <th>Enseignement Comp</th>
+                <td>{{ elefe.enseignementComp.NomEnseignementComp }}</td>
+            </tr>
+
         </tbody>
     </table>
     
-    <a class="btn btn-primary" href="{{ path('eleves_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('eleves_index') }}">Retour à la liste</a>
 
-    <a class="btn btn-primary" href="{{ path('eleves_edit', {'id': elefe.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('eleves_edit', {'id': elefe.id}) }}">Modifier</a>
 
     {{ include('eleves/_delete_form.html.twig') }}
 {% endblock %}

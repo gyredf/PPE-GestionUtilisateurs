@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Eleves index{% endblock %}
+{% block title %}Liste des élèves{% endblock %}
 
 {% block body %}
-    <h1>Eleves index</h1>
+    <h1>Liste des élèves</h1>
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
@@ -52,7 +52,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Aucun élèves n'a été enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
