@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Eleves;
 use App\Form\ElevesType;
 use App\Repository\ElevesRepository;
@@ -23,6 +25,14 @@ class ElevesController extends AbstractController
         return $this->render('eleves/index.html.twig', [
             'eleves' => $elevesRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/pdf", name="eleves_pdf", methods={"GET"})
+     */
+    public function pdfGenerator(ElevesRepository $elevesRepository): Response
+    {
+        return $this->render('default/pdf.php');
     }
 
     /**
@@ -91,4 +101,5 @@ class ElevesController extends AbstractController
 
         return $this->redirectToRoute('eleves_index');
     }
+
 }

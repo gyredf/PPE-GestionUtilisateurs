@@ -3,15 +3,41 @@
 {% block title %}Liste des élèves{% endblock %}
 
 {% block body %}
-    <h1>Liste des élèves</h1>
+<style>
+{# html{
+    background-image:url('https://i.ytimg.com/vi/YemL1F2zQmg/maxresdefault.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body{
+    height:100vh;
+    animation: bjr 3s 3s forwards;
+    transform-origin: bottom;
+    overflow:hidden;
+}
+@keyframes bjr {
+    0%{
+        transform: perspective(900px) rotateX(0deg) ; 
+    }
+    100%{
+        transform: perspective(900px) rotateX(90deg);
+    }
+} #}
+</style>
+    <h1>Liste des élèves : <span id="nbrEleves"></span></h1>
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-search"></i></span>
         </div>
-        <input id="rechercher" type="text" class="form-control" placeholder="Ex.: Nom / Prénom / Classe">
+        <input id="rechercher" type="text" class="form-control" placeholder="Ex.: Nom,Prénom,Classe (Séparation par virgules)">
     </div>
-    <table class="table">
-        <thead>
+    <br>
+    <div class="alert alert-info"><span id="nbrElevesActu"></span></div>
+    <a class="btn btn-success" href="{{ path('eleves_new') }}"><i class="fas fa-user-plus"></i> Ajouter</a>
+     <a class="btn btn-danger" href="{{ path('eleves_pdf') }}"><i class="fas fa-file-download"></i> PDF</a>
+    <br><br>
+    <table class="table table-striped">
+        <thead class="thead-light">
             <tr>
                 {# <th>Id</th> #}
                 <th>Nom</th>
@@ -57,16 +83,69 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-success" href="{{ path('eleves_new') }}"><i class="fas fa-user-plus"></i> Ajouter</a>
+    <script src="../print.js"></script>
     <script>
     $(document).ready(function(){
-        $("#rechercher").on("keyup", function() {
+        $('#nbrEleves').html($('table tbody tr').length);
+        $('#nbrElevesActu').html(count());
+        /*$("#rechercher").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $("table tbody tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
+            $('#nbrElevesActu').html(count());
+            
+        });*/
+        $("#rechercher").keyup(function () {
+        // Split the current value of the filter textbox
+            var data = this.value.split(",");
+            // Get the table rows
+            var rows = $("table tbody").find("tr");
+            if (this.value == "") {
+                rows.show();
+                return;
+            }
+
+            // Hide all the rows initially
+            rows.hide();
+
+            // Filter the rows; check each term in data
+            rows.filter(function (i, v) {
+                for (var d = 0; d < data.length; ++d) {
+                    if ($(this).is(":contains('" + data[d] + "')")) {
+                        return true;
+                    }
+                }
+                return false;
+            })
+            // Show the rows that match.
+            .show();
+            }).focus(function () { // style the filter box
+                this.value = "";
+                    $(this).css({
+                        "color": "black"
+                    });
+                $(this).unbind('focus');
+            }).css({
+                "color": "#C0C0C0"
+            });
+
+            // make contains case insensitive globally
+            // (if you prefer, create a new Contains or containsCI function)
+            $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+                return function( elem ) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
         });
     });
+
+    function count(){
+        var row = $('table tbody tr:visible').length;
+        if (row != 0){
+            return "Nombre d'élèves : " + row;
+        } else {
+            return "Il n'y a pas d'élèves correspondant à cette recherche";
+        }       
+    }
     </script>
 {% endblock %}
