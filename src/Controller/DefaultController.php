@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
+use App\Repository\ElevesRepository;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
@@ -21,15 +22,19 @@ class DefaultController extends AbstractController
 	/**
      * @Route("/pdftest", name="default_pdf")
      */
-    public function pdf(){
+    public function pdf(ElevesRepository $elevesRepository){
 	    // Instantiate Dompdf with our options
-	    $dompdf = new Dompdf();
+		$dompdf = new Dompdf();
 
 	    // Retrieve the HTML generated in our twig file
-	    // $html = file_get_contents('eleves/index.html.twig');
+		// $html = file_get_contents('eleves/index.html.twig');
+		
+		$response = $this->render('eleves/table_liste_eleve.html.twig', [
+            'eleves' => $elevesRepository->findAll(),
+        ]);
 
 	    // Load HTML to Dompdf
-	    $dompdf->loadHtml('helloWorld');
+	    $dompdf->loadHtml($response->getContent());
 
 	    // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
 	    $dompdf->setPaper('A4', 'portrait');
