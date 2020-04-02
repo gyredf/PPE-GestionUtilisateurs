@@ -28,7 +28,7 @@ class ElevesController extends AbstractController
     }
 
     /**
-     * @Route("/pdf", name="eleves_pdf", methods={"GET"})
+     * @Route("/", name="eleves_pdf", methods={"GET"})
      */
     public function pdfGenerator(ElevesRepository $elevesRepository): Response
     {

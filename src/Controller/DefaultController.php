@@ -20,7 +20,7 @@ class DefaultController extends AbstractController
     }
 
 	/**
-     * @Route("/pdftest", name="default_pdf")
+     * @Route("/pdf", name="default_pdf")
      */
     public function pdf(ElevesRepository $elevesRepository){
 	    // Instantiate Dompdf with our options
