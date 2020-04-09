@@ -46,7 +46,6 @@ class DefaultController extends AbstractController
         	"Attachment" => false
 	    ]);
 
-
 	    // return $this->render('default/index.html.twig', [
      //        'controller_name' => 'DefaultController',
      //    ]);

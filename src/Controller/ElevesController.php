@@ -27,13 +27,6 @@ class ElevesController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/", name="eleves_pdf", methods={"GET"})
-     */
-    public function pdfGenerator(ElevesRepository $elevesRepository): Response
-    {
-        return $this->render('default/pdf.php');
-    }
 
     /**
      * @Route("/new", name="eleves_new", methods={"GET","POST"})
